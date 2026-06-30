@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+// getStaticPaths generates one static HTML page per Markdown post at build time.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p><small>{post.data.pubDate.toDateString()}</small></p>
+    <Content />
+  </article>
+</Base>

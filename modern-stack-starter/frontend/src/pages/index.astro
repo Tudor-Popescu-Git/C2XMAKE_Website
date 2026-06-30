@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import LatestStatus from '../components/LatestStatus.tsx';
+---
+
+<Base title="Home">
+  <h1>Modern stack starter</h1>
+  <p>
+    This page is static HTML built by Astro. The box below is a React
+    component (an "island") that hydrates in the browser and fetches live
+    data from the FastAPI Python backend.
+  </p>
+
+  <!-- client:load tells Astro to ship + hydrate this component's JS.
+       Everything else on the page ships zero JavaScript. -->
+  <LatestStatus client:load />
+
+  <p style="margin-top: 2rem;">
+    <a href="/blog">Read the blog &rarr;</a>
+  </p>
+</Base>
